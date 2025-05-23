@@ -9,7 +9,7 @@
 6. EDA!!
 7. sort out tweets by location and look at clusters of key words
 
-# Here's a breakdown of the main components of Keras_NLP_Starter:
+## Here's a breakdown of the main components of Keras_NLP_Starter
 
 Project Goal:
 Build a model that predicts whether a tweet is about a real disaster (1) or not (0)
