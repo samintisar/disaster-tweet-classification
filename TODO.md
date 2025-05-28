@@ -1,14 +1,52 @@
 # 🚀 Disaster Tweet Classification Model - TODO & Improvements
 
-## 👥 Team Responsibilities
+## 🎯 Priority Levels
 
-**🤖 Friend's Tasks: Model Development & Performance**
-- Model Accuracy & F1 Score Improvements
-- Performance & Efficiency Optimization
+### 🤖 Yeal's Priorities (Model Development & Performance)
 
-**🌐 Your Tasks: Deployment & Applications**
-- Production Deployment Strategies
-- Advanced Applications & Extensions
+**🔥 High Priority (Immediate Impact)**
+- Model ensemble implementation (DistilBERT + RoBERTa + DeBERTa)
+- Extended meta features (emoji sentiment, readability scores, POS tags)
+- Hyperparameter tuning (learning rates, batch sizes, dropout)
+- Data augmentation techniques (synonym replacement, back-translation)
+- Advanced training techniques (learning rate scheduling, early stopping)
+
+**📈 Medium Priority (Performance Gains)**
+- Larger transformer models (BERT-base/large, RoBERTa, DeBERTa-v3)
+- Advanced loss functions (focal loss, weighted cross-entropy)
+- Model compression (knowledge distillation, pruning, quantization)
+- Hardware acceleration (CUDA support, multi-GPU training)
+- Memory optimization (gradient checkpointing, dynamic padding)
+
+**🚀 Future Enhancements (Research & Experimentation)**
+- Advanced neural architectures (LSTM/GRU on transformers, CNN layers)
+- Domain-specific features (disaster keywords, location-based risk)
+- Advanced NLP features (NER, topic modeling, dependency parsing)
+- Evaluation improvements (k-fold cross-validation, confidence metrics)
+- Inference optimization (model caching, batch processing, async)
+
+### 🌐 Samin's Priorities (Deployment & Applications)
+
+**🔥 High Priority (Immediate Impact)**
+- Flask REST API development (/predict, /batch_predict, /health endpoints)
+- Docker containerization (Dockerfile, docker-compose, multi-stage builds)
+- Twitter API v2 integration (real-time scraping, rate limiting)
+- Basic web dashboard (React/Vue.js frontend, real-time display)
+- API security (authentication, rate limiting, input validation)
+
+**📈 Medium Priority (Scalability & Production)**
+- Cloud deployment (AWS SageMaker, Lambda, API Gateway)
+- Kubernetes orchestration (manifests, autoscaling, ingress)
+- Monitoring & analytics (performance dashboards, model drift detection)
+- Data pipeline automation (ingestion, validation, storage)
+- System monitoring (APM, log aggregation, alerting)
+
+**🚀 Future Enhancements (Advanced Features)**
+- Mobile applications (iOS/Android, push notifications, offline capabilities)
+- Multi-language support (Spanish, French, German classification)
+- Advanced AI features (disaster report generation, chatbot, summarization)
+- Multimodal integration (image analysis, video content, satellite imagery)
+- Security & compliance (data encryption, GDPR compliance, audit logging)
 
 ---
 
@@ -333,56 +371,6 @@
   - [ ] Create automated deployment testing
   - [ ] Add security vulnerability scanning
   - [ ] Implement model validation testing
-
----
-
-## 🎯 Priority Levels
-
-### 🤖 Yeal's Priorities (Model Development & Performance)
-
-**🔥 High Priority (Immediate Impact)**
-- Model ensemble implementation (DistilBERT + RoBERTa + DeBERTa)
-- Extended meta features (emoji sentiment, readability scores, POS tags)
-- Hyperparameter tuning (learning rates, batch sizes, dropout)
-- Data augmentation techniques (synonym replacement, back-translation)
-- Advanced training techniques (learning rate scheduling, early stopping)
-
-**📈 Medium Priority (Performance Gains)**
-- Larger transformer models (BERT-base/large, RoBERTa, DeBERTa-v3)
-- Advanced loss functions (focal loss, weighted cross-entropy)
-- Model compression (knowledge distillation, pruning, quantization)
-- Hardware acceleration (CUDA support, multi-GPU training)
-- Memory optimization (gradient checkpointing, dynamic padding)
-
-**🚀 Future Enhancements (Research & Experimentation)**
-- Advanced neural architectures (LSTM/GRU on transformers, CNN layers)
-- Domain-specific features (disaster keywords, location-based risk)
-- Advanced NLP features (NER, topic modeling, dependency parsing)
-- Evaluation improvements (k-fold cross-validation, confidence metrics)
-- Inference optimization (model caching, batch processing, async)
-
-### 🌐 Samin's Priorities (Deployment & Applications)
-
-**🔥 High Priority (Immediate Impact)**
-- Flask REST API development (/predict, /batch_predict, /health endpoints)
-- Docker containerization (Dockerfile, docker-compose, multi-stage builds)
-- Twitter API v2 integration (real-time scraping, rate limiting)
-- Basic web dashboard (React/Vue.js frontend, real-time display)
-- API security (authentication, rate limiting, input validation)
-
-**📈 Medium Priority (Scalability & Production)**
-- Cloud deployment (AWS SageMaker, Lambda, API Gateway)
-- Kubernetes orchestration (manifests, autoscaling, ingress)
-- Monitoring & analytics (performance dashboards, model drift detection)
-- Data pipeline automation (ingestion, validation, storage)
-- System monitoring (APM, log aggregation, alerting)
-
-**🚀 Future Enhancements (Advanced Features)**
-- Mobile applications (iOS/Android, push notifications, offline capabilities)
-- Multi-language support (Spanish, French, German classification)
-- Advanced AI features (disaster report generation, chatbot, summarization)
-- Multimodal integration (image analysis, video content, satellite imagery)
-- Security & compliance (data encryption, GDPR compliance, audit logging)
 
 ---
 
