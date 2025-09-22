@@ -1,0 +1,11 @@
+torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+transformers
+datasets
+scikit-learn
+pandas
+numpy
+matplotlib
+seaborn
+nltk
+tqdm
+jupyter

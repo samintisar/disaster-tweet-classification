@@ -1,0 +1,55 @@
+{
+  "data_paths": {
+    "train_raw": "Data/train.csv",
+    "test_raw": "Data/test.csv",
+    "train_cleaned": "Data/train_cleaned.csv",
+    "test_cleaned": "Data/test_cleaned.csv",
+    "submission": "Data/submission.csv"
+  },
+  "model_config": {
+    "model_name": "distilbert-base-uncased",
+    "max_length": 160,
+    "num_labels": 2,
+    "batch_size": 32,
+    "val_split": 0.2,
+    "learning_rate": 1e-5,
+    "num_epochs": 4,
+    "dropout": 0.2
+  },
+  "feature_config": {
+    "meta_features": [
+      "word_count",
+      "unique_word_count",
+      "stop_word_count",
+      "url_count",
+      "mean_word_length",
+      "char_count",
+      "punctuation_count",
+      "hashtag_count",
+      "mention_count",
+      "vader_compound"
+    ],
+    "text_cleaning": {
+      "remove_urls": true,
+      "remove_mentions": true,
+      "remove_emails": true,
+      "remove_numbers": true,
+      "remove_stopwords": true,
+      "lowercase": true,
+      "spell_correction": true
+    }
+  },
+  "training_config": {
+    "random_seed": 42,
+    "gradient_clipping": 1.0,
+    "warmup_steps": 0,
+    "early_stopping_patience": 3,
+    "save_best_model": true
+  },
+  "paths": {
+    "models_dir": "models",
+    "results_dir": "results",
+    "visualizations_dir": "results/visualizations",
+    "metrics_dir": "results/metrics"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
+    "ANTHROPIC_AUTH_TOKEN": "4e901381f93043e58b49e6b4cc855adf.pdKvJ0P9vis250BA",
+    "ANTHROPIC_MODEL": "glm-4.5"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "mcp__ide__executeCode",
+      "Bash(python:*)"    
+    ],
+    "deny": []
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": []
+}
