@@ -37,37 +37,38 @@
 - Include exact file paths in descriptions
 
 ## Path Conventions
-- **Single project**: `src/`, `tests/` at repository root
+- **ML Project**: `src/preprocessing/`, `src/models/`, `src/inference/`, `tests/`
+- **Single file deployment**: `deploy/simple_deploy.py`, `tests/`
 - **Web app**: `backend/src/`, `frontend/src/`
 - **Mobile**: `api/src/`, `ios/src/` or `android/src/`
-- Paths shown below assume single project - adjust based on plan.md structure
+- Paths shown below assume ML project structure - adjust based on plan.md structure
 
 ## Phase 3.1: Setup
 - [ ] T001 Create project structure per implementation plan
 - [ ] T002 Initialize [language] project with [framework] dependencies
 - [ ] T003 [P] Configure linting and formatting tools
+- [ ] T004 Set up ML environment (PyTorch, transformers, etc.)
 
 ## Phase 3.2: Tests First (TDD) ⚠️ MUST COMPLETE BEFORE 3.3
 **CRITICAL: These tests MUST be written and MUST FAIL before ANY implementation**
-- [ ] T004 [P] Contract test POST /api/users in tests/contract/test_users_post.py
-- [ ] T005 [P] Contract test GET /api/users/{id} in tests/contract/test_users_get.py
-- [ ] T006 [P] Integration test user registration in tests/integration/test_registration.py
-- [ ] T007 [P] Integration test auth flow in tests/integration/test_auth.py
+- [ ] T005 [P] Contract test text preprocessing in tests/contract/test_preprocessing.py
+- [ ] T006 [P] Contract test feature extraction in tests/contract/test_features.py
+- [ ] T007 [P] Integration test model inference in tests/integration/test_inference.py
+- [ ] T008 [P] Integration test end-to-end tweet classification in tests/integration/test_classification.py
 
 ## Phase 3.3: Core Implementation (ONLY after tests are failing)
-- [ ] T008 [P] User model in src/models/user.py
-- [ ] T009 [P] UserService CRUD in src/services/user_service.py
-- [ ] T010 [P] CLI --create-user in src/cli/user_commands.py
-- [ ] T011 POST /api/users endpoint
-- [ ] T012 GET /api/users/{id} endpoint
-- [ ] T013 Input validation
-- [ ] T014 Error handling and logging
+- [ ] T009 [P] Text preprocessing functions in src/preprocessing/text_cleaner.py
+- [ ] T010 [P] Feature extraction in src/preprocessing/features.py
+- [ ] T011 [P] Model loading in src/models/disaster_classifier.py
+- [ ] T012 [P] Inference service in src/inference/predictor.py
+- [ ] T013 [P] Streamlit UI in src/api/streamlit_app.py
+- [ ] T014 Integration testing and performance validation
 
 ## Phase 3.4: Integration
-- [ ] T015 Connect UserService to DB
-- [ ] T016 Auth middleware
-- [ ] T017 Request/response logging
-- [ ] T018 CORS and security headers
+- [ ] T015 Connect preprocessing to model inference
+- [ ] T016 X API v2 integration for real-time tweets
+- [ ] T017 Performance monitoring and optimization
+- [ ] T018 Error handling and logging for ML components
 
 ## Phase 3.5: Polish
 - [ ] T019 [P] Unit tests for validation in tests/unit/test_validation.py
@@ -77,18 +78,18 @@
 - [ ] T023 Run manual-testing.md
 
 ## Dependencies
-- Tests (T004-T007) before implementation (T008-T014)
-- T008 blocks T009, T015
-- T016 blocks T018
+- Tests (T005-T008) before implementation (T009-T014)
+- T009 blocks T010, T015
+- T011 blocks T012
 - Implementation before polish (T019-T023)
 
 ## Parallel Example
 ```
-# Launch T004-T007 together:
-Task: "Contract test POST /api/users in tests/contract/test_users_post.py"
-Task: "Contract test GET /api/users/{id} in tests/contract/test_users_get.py"
-Task: "Integration test registration in tests/integration/test_registration.py"
-Task: "Integration test auth in tests/integration/test_auth.py"
+# Launch T005-T008 together:
+Task: "Contract test text preprocessing in tests/contract/test_preprocessing.py"
+Task: "Contract test feature extraction in tests/contract/test_features.py"
+Task: "Integration test model inference in tests/integration/test_inference.py"
+Task: "Integration test end-to-end tweet classification in tests/integration/test_classification.py"
 ```
 
 ## Notes
@@ -102,18 +103,18 @@ Task: "Integration test auth in tests/integration/test_auth.py"
 
 1. **From Contracts**:
    - Each contract file → contract test task [P]
-   - Each endpoint → implementation task
-   
+   - Each ML component → implementation task
+
 2. **From Data Model**:
    - Each entity → model creation task [P]
-   - Relationships → service layer tasks
-   
+   - Features → preprocessing tasks
+
 3. **From User Stories**:
    - Each story → integration test [P]
-   - Quickstart scenarios → validation tasks
+   - ML performance requirements → validation tasks
 
 4. **Ordering**:
-   - Setup → Tests → Models → Services → Endpoints → Polish
+   - Setup → Tests → Preprocessing → Models → Inference → UI → Polish
    - Dependencies block parallel execution
 
 ## Validation Checklist

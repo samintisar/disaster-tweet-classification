@@ -44,11 +44,19 @@ When creating this spec from a user prompt:
 3. **Think like a tester**: Every vague requirement should fail the "testable and unambiguous" checklist item
 4. **Common underspecified areas**:
    - User types and permissions
-   - Data retention/deletion policies  
+   - Data retention/deletion policies
    - Performance targets and scale
    - Error handling behaviors
    - Integration requirements
    - Security/compliance needs
+
+### ML Project Specific Considerations
+For disaster tweet classification and similar ML projects:
+- **Model Performance**: Specify accuracy, precision, recall, F1 score requirements
+- **Latency Requirements**: Real-time processing needs (<1s response time)
+- **Data Sources**: Specify tweet sources, API limits, authentication methods
+- **Feature Engineering**: Define which features to extract and maintain consistency
+- **Model Deployment**: Single-file vs. microservice deployment approach
 
 ---
 

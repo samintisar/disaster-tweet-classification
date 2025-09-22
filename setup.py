@@ -1,0 +1,35 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="disaster-tweet-classification",
+    version="1.0.0",
+    description="Real-time disaster tweet classification system using X API v2",
+    author="Portfolio Project",
+    python_requires=">=3.11",
+    packages=find_packages(),
+    install_requires=[
+        "tweepy>=4.14.0",
+        "transformers>=4.35.0",
+        "torch>=2.1.0",
+        "streamlit>=1.28.0",
+        "pandas>=2.1.0",
+        "pytest>=7.4.0",
+        "black>=23.9.0",
+        "flake8>=6.1.0",
+        "scikit-learn>=1.3.0",
+        "numpy>=1.24.0",
+        "requests>=2.31.0",
+        "python-dotenv>=1.0.0",
+        "nltk>=3.8.0",
+        "regex>=2023.10.3",
+        "plotly>=5.17.0",
+        "tqdm>=4.66.0",
+    ],
+    classifiers=[
+        "Development Status :: 4 - Beta",
+        "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+    ],
+)

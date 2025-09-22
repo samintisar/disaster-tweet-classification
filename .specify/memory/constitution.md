@@ -1,50 +1,67 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Disaster Tweet Classification Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Research-Driven Development
+All features MUST start with comprehensive research phase. Unknowns MUST be identified and resolved before implementation. Research findings MUST be documented with decisions, rationale, and alternatives considered. Technical choices MUST be validated against domain best practices.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Single-File Deployment Simplicity
+Deployment components MUST prioritize simplicity over complexity. Single-file applications preferred over microservices. Direct integration over message queues. Manual configuration over automation for simple deployments. Each deployment component MUST be independently runnable.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Model-First Architecture
+Machine learning model capabilities MUST drive architecture decisions. Preprocessing pipelines MUST be reusable between training and inference. Feature extraction MUST be consistent across all environments. Model performance MUST be validated in production-like conditions.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Real-time Processing
+Tweet classification MUST support real-time processing. Stream processing MUST be prioritized over batch processing. Latency MUST be measured and optimized. API responses MUST be under 1 second for individual predictions.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Integration Testing Focus
+Testing MUST focus on integration between components. Model inference tests MUST use real preprocessing pipelines. API tests MUST validate end-to-end workflows. Performance tests MUST simulate production load patterns.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Technical Standards
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### Technology Stack Requirements
+- **ML Framework**: PyTorch with transformers library
+- **NLP Processing**: DistilBERT for text embeddings
+- **Feature Engineering**: Pandas-based meta-feature extraction
+- **API Layer**: Streamlit for user interface
+- **External APIs**: X API v2 for tweet collection
+- **Data Processing**: Real-time streaming with tweepy
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Performance Standards
+- **Inference Speed**: <100ms per tweet on CPU
+- **Memory Usage**: <1GB for complete application
+- **API Response**: <1 second for classification results
+- **Stream Processing**: Handle 100+ tweets/minute
+- **Model Accuracy**: Maintain >80% F1 score
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+## Development Workflow
+
+### Feature Development Process
+1. **Research Phase**: Document technical decisions and alternatives
+2. **Design Phase**: Create data models and API contracts
+3. **Test Phase**: Write failing tests before implementation
+4. **Implementation**: Build features to make tests pass
+5. **Validation**: End-to-end testing and performance validation
+
+### Code Quality Standards
+- All preprocessing functions MUST be reusable
+- Model loading MUST be lazy and efficient
+- Error handling MUST be comprehensive
+- Configuration MUST be environment-based
+- Dependencies MUST be minimal and justified
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+### Amendment Process
+- Amendments require documented research and justification
+- Changes MUST be backward compatible
+- Version numbers MUST follow semantic versioning
+- All team members MUST review and approve amendments
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+### Compliance Requirements
+- All code MUST follow constitutional principles
+- Architecture decisions MUST be documented
+- Performance MUST be continuously monitored
+- Security MUST be validated for external API integrations
+
+**Version**: 1.0.0 | **Ratified**: 2025-09-22 | **Last Amended**: 2025-09-22

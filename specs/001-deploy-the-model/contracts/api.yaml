@@ -1,0 +1,335 @@
+openapi: 3.0.3
+info:
+  title: Disaster Tweet Classification API
+  description: API for collecting, processing, and classifying disaster-related tweets
+  version: 1.0.0
+  contact:
+    name: Portfolio Project
+    email: portfolio@example.com
+
+servers:
+  - url: http://localhost:8501
+    description: Local Streamlit development server
+
+paths:
+  /:
+    get:
+      summary: Main application interface
+      description: Streamlit web interface for the disaster tweet classification system
+      responses:
+        '200':
+          description: HTML interface for the application
+          content:
+            text/html:
+              schema:
+                type: string
+
+  /api/health:
+    get:
+      summary: System health check
+      description: Returns current system status and health metrics
+      responses:
+        '200':
+          description: System status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/APIStatus'
+        '500':
+          description: System error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/classify:
+    post:
+      summary: Classify tweet text
+      description: Classify a single tweet text for disaster content
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - text
+              properties:
+                text:
+                  type: string
+                  description: Tweet text to classify
+                  maxLength: 280
+      responses:
+        '200':
+          description: Classification result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClassificationResult'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Classification error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/batch-classify:
+    post:
+      summary: Batch classify tweets
+      description: Classify multiple tweets in a single request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - tweets
+              properties:
+                tweets:
+                  type: array
+                  items:
+                    type: string
+                  description: List of tweet texts to classify
+                  maxItems: 100
+      responses:
+        '200':
+          description: Batch classification results
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ClassificationResult'
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Classification error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/stream/start:
+    post:
+      summary: Start tweet streaming
+      description: Start collecting and classifying tweets in real-time
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                keywords:
+                  type: array
+                  items:
+                    type: string
+                  description: Disaster-related keywords to filter tweets
+                interval:
+                  type: integer
+                  description: Polling interval in seconds
+                  default: 60
+                  minimum: 30
+                  maximum: 300
+      responses:
+        '200':
+          description: Streaming started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "streaming_started"
+                  stream_id:
+                    type: string
+                    description: Unique identifier for the stream
+        '400':
+          description: Invalid request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Streaming error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/stream/stop:
+    post:
+      summary: Stop tweet streaming
+      description: Stop the active tweet streaming session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - stream_id
+              properties:
+                stream_id:
+                  type: string
+                  description: Stream identifier to stop
+      responses:
+        '200':
+          description: Streaming stopped
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "streaming_stopped"
+        '404':
+          description: Stream not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Streaming error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    APIStatus:
+      type: object
+      required:
+        - status
+        - last_tweet_collected
+        - last_prediction_made
+        - api_rate_limit_remaining
+        - model_loaded
+        - uptime_seconds
+      properties:
+        status:
+          type: string
+          enum: [healthy, degraded, error]
+          description: System status
+        last_tweet_collected:
+          type: string
+          format: date-time
+          description: Last successful tweet collection timestamp
+        last_prediction_made:
+          type: string
+          format: date-time
+          description: Last successful prediction timestamp
+        api_rate_limit_remaining:
+          type: integer
+          minimum: 0
+          description: Remaining API calls in current window
+        model_loaded:
+          type: boolean
+          description: Whether model is loaded in memory
+        error_message:
+          type: string
+          description: Current error message (if any)
+        uptime_seconds:
+          type: integer
+          minimum: 0
+          description: System uptime in seconds
+
+    ClassificationResult:
+      type: object
+      required:
+        - tweet_id
+        - prediction
+        - confidence
+        - probabilities
+        - timestamp
+        - model_version
+      properties:
+        tweet_id:
+          type: string
+          description: Tweet identifier
+        prediction:
+          type: string
+          enum: [disaster, non_disaster]
+          description: Classification prediction
+        confidence:
+          type: number
+          format: float
+          minimum: 0.0
+          maximum: 1.0
+          description: Confidence score
+        probabilities:
+          type: object
+          required:
+            - disaster
+            - non_disaster
+          properties:
+            disaster:
+              type: number
+              format: float
+              minimum: 0.0
+              maximum: 1.0
+            non_disaster:
+              type: number
+              format: float
+              minimum: 0.0
+              maximum: 1.0
+          description: Class probabilities
+        timestamp:
+          type: string
+          format: date-time
+          description: Prediction timestamp
+        model_version:
+          type: string
+          description: Model version identifier
+
+    Error:
+      type: object
+      required:
+        - error
+        - message
+      properties:
+        error:
+          type: string
+          description: Error code
+        message:
+          type: string
+          description: Error description
+        timestamp:
+          type: string
+          format: date-time
+          description: Error timestamp
+
+tags:
+  - name: System
+    description: System monitoring and health endpoints
+  - name: Classification
+    description: Tweet classification endpoints
+  - name: Streaming
+    description: Real-time tweet streaming endpoints
+
+security:
+  - ApiKeyAuth: []
+
+securitySchemes:
+  ApiKeyAuth:
+    type: apiKey
+    in: header
+    name: X-API-Key
+    description: API key for authentication (required for production use)

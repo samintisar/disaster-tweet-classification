@@ -8,7 +8,10 @@
     "allow": [
       "Bash(mkdir:*)",
       "mcp__ide__executeCode",
-      "Bash(python:*)"    
+      "Bash(python:*)",
+      "mcp__context7",
+      "Bash(streamlit run:*)",
+      "Bash(curl:*)"
     ],
     "deny": []
   },
